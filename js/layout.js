@@ -22,8 +22,8 @@
     qs: function () { var o = {}; new URLSearchParams(location.search).forEach(function (v, k) { o[k] = v; }); return o; },
     col: function (p) { return p >= 100 ? '#2f7d4f' : p >= 50 ? '#c9500f' : '#c0432b'; },
     pc: function (x) { return Math.min(100, Math.round(x.Done / (x.Target || 1) * 100)); },
-    gl: function (g) { return g === 'R' ? 'Grade R' : 'Grade ' + g; },
-    safeLink: function (u) { return /^\s*(javascript|data|vbscript):/i.test(u) ? '' : u; },
+    gl: function (g) { return g === 'R' ? 'Grade R' : 'Grade ' + L.esc(g); },
+    safeLink: function (u) { var c = String(u).replace(/[\u0000-\u0020\u007f]+/g, ''); return /^[a-z][a-z0-9+.-]*:/i.test(c) && !/^(https?|mailto):/i.test(c) ? '' : String(u).trim(); },
     /* photo(): shows the image if the file exists in /images, otherwise the green-to-orange gradient */
     photo: function (path) { return "background-image:url('" + path + "'),linear-gradient(135deg,#12503b,#c9500f);background-size:cover;background-position:center"; },
     opts: function (list, all, val) { return (all ? '<option value="all">' + all + '</option>' : '') + list.map(function (o) { return '<option value="' + L.esc(o) + '"' + (o === val ? ' selected' : '') + '>' + L.esc(o) + '</option>'; }).join(''); },
@@ -41,6 +41,8 @@
       document.getElementById('side').innerHTML = NAV.map(function (n) { return '<a class="nav' + (n[0] === page ? ' on' : '') + '" href="' + n[1] + '">' + L.icon(n[3], 22) + '<span>' + n[2].replace('&', '&amp;') + '</span></a>'; }).join('') +
         '<div class="sidefoot">' + L.logo(54) + '<span><b>WILD</b><b>IMPACT</b></span></div><div class="rule"></div>';
       document.getElementById('xl').addEventListener('change', EchoData.excelHandler({ forceUpdate: function () { document.getElementById('note').textContent = EchoData.note(); if (cb) cb(); } }));
+      EchoData.ready.then(function () { document.getElementById('note').textContent = EchoData.note(); });
+
     }
   };
   window.Layout = L;

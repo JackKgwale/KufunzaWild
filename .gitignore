@@ -1,0 +1,32 @@
+# Secrets: never commit these
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Dependencies / build output
+node_modules/
+dist/
+build/
+.cache/
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Excel temp/lock files created while echo-data.xlsx is open
+~$*
+.~lock.*#
+*.tmp
+
+# Editor / local settings
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.swp
+
+# Logs
+*.log
+npm-debug.log*

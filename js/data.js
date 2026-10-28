@@ -48,12 +48,12 @@
     });
   })();
   window.EchoData = {
-    ready: ready, TEACHER: TEACHER, ECHOT: ECHOT,
+    ready: ready,
     get: function () { return D; },
     grades: function () { return GR.slice(); },
     terms: function () { return ['1', '2', '3', '4']; },
     landscapes: function () { var l = uniq(D.schools.map(function (x) { return x.Landscape; }).concat(D.curriculum.map(function (x) { return x.Landscape; }), D.echo.map(function (x) { return x.Landscape; }))); return l.length ? l : LS.slice(); },
-    uniq: uniq, note: function () { return label; }, sample: sample,
+    uniq: uniq, note: function () { return label; },
     reset: function () { try { localStorage.removeItem(KEY); } catch (e) {} location.reload(); },
     excelHandler: function (c) {
       return function (e) {
